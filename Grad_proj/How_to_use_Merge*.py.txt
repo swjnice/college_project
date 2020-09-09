@@ -1,0 +1,22 @@
+1. input/output path 설정
+- input_file_path "/ ~~ /" : 여기 폴더 안에 'target.txt'와 'target2.txt' 두 파일이 필요합니다. ( target.txt - Image file list, target2.txt - txt file list)
+- merge할 때 사용할 Image들을 모아놓은 폴더에서 make_list_wj.py를 실행하면 target.txt 와 target2.txt 두 파일이 생기게 됩니다.
+- merge할 때 사용할 Image들의 개수가 너무 많거나 class별로 따로 관리하여 한 폴더에 넣기 힘들 경우 txt_sum_list.py 를 실행하시면 해당 폴더에 있는 '*target.txt' 파일들을 읽고 하나로 합쳐줍니다.
+
+- output_file_path "/~~~/" : 이 폴더 안에 merge된 Image file과 txt file 한 쌍씩 생성됩니다.
+
+2. 실행
+-two_merge 함수 인자 : class1 = [], class2 = [], num = 1, index = '000'
+class1 = merge할 때 중심이 될 물체의 class list, []를 넣으면 random
+class2 = merge할 때 주위에 오게 될 물체의 class list, []를 넣으면 random
+num = 반복횟수
+index = outfile prefix
+ex) Merger.two_merge([0], [1], 1, 000) -> 사과(class 0) 주위에 아보카도(class 1)이 angle과 overlap_distance에 따라서 붙어 merge된 사진이 24장 나옴.
+Merger.two_merge([],[],2,000) -> 랜덤한 두 class를 정하고 angle과 overlap_distance 따라 merge된 사진 24장씩 두세트 나옴.
+
+- multi_merge 함수 인자 : classes = [], item_num = 2 , num = 1, index = '000'
+classes = merge할 품목 class list의 list
+item_num = 한 image에 merge할 품목 개수
+num = 반복횟수
+index = outfile prefix
+ex) Merger.multi_merge([[0], [1], [2]], 3, 2, '000') -> 사과(class 0)와 아보카도(class 1)와 포카리(class 2)가 merge된 이미지 파일 두개 생성
